@@ -1,5 +1,5 @@
 from djongo import models
-from pymongo import MongoClient
+# from pymongo import MongoClient
 
 """ 
 def get_db_collection():
@@ -26,7 +26,7 @@ class User(models.Model):
         blank=False
     )
 
-    def __str__():
+    def __str__(self):
         return '{} {} {}'.format(self.id, self.real_name, self.tz)
 
 # many-to-one relationship with User model
@@ -49,5 +49,5 @@ class ActivityPeriod(models.Model):
         on_delete=models.CASCADE
     )
 
-    def __str__():
+    def __str__(self):
         return '{} {}'.format(self.start_time, self.end_time)
