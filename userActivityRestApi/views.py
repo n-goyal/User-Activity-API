@@ -21,14 +21,11 @@ def userList(request):
         print(type(usersJson))
 
         for user in usersJson:
-            activityRecords = []
-
             activity = ActivityPeriod.objects.filter(
                 user=User.objects.get(id=user.get('id'))
             )
             activitySerializer = ActivityPeriodSerializer(activity, many=True)
-            activityRecords.append(activitySerializer.data)
 
-            user['activity_periods'] = activityRecords
+            user['activity_periods'] = activitySerializer.data
 
         return JsonResponse(usersJson, safe=False, status=status.HTTP_200_OK)
