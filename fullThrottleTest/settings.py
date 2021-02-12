@@ -88,7 +88,7 @@ DATABASES = {
         'ENGINE': 'djongo',
         "CLIENT": {
             "name": "fullThrottleDB",
-            "host": 'mongodb+srv://test-user-01:j1PFjfJxAxuhRGFr@freetiercluster.3ruzd.mongodb.net/fullThrottleDB?authSource=admin&replicaSet=atlas-h4ytji-shard-0&w=majority&readPreference=primary&retryWrites=true&ssl=true',
+            "host": 'mongodb+srv://test-user-01:j1PFjfJxAxuhRGFr@freetiercluster.3ruzd.mongodb.net/fullThrottleDB?retryWrites=true&w=majority',
             "username": 'test-user-01',
             "password": 'j1PFjfJxAxuhRGFr',
             "authMechanism": "SCRAM-SHA-1",
