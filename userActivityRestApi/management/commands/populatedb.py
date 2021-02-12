@@ -18,20 +18,15 @@ def generateData(num):
         print(user)
 
         # print(User.objects.get())
+        numActivePeriods = random.randint(2, 18)
 
-        activityPeriod1 = ActivityPeriod.objects.create(
-            start_time=datetime.now(),
-            end_time=datetime.now() + timedelta(random.randint(2, 9)),
-            user=User.objects.get(id=user_id)
-        )
+        for i in range(numActivePeriods):
+            activityPeriod1 = ActivityPeriod.objects.create(
+                start_time=datetime.now() - timedelta(random.randint(5, 20)),
+                end_time=datetime.now() + timedelta(random.randint(2, 10)),
+                user=User.objects.get(id=user_id)
+            )
         print(activityPeriod1)
-
-        activityPeriod2 = ActivityPeriod.objects.create(
-            start_time=datetime.now(),
-            end_time=datetime.now() + timedelta(random.randint(2, 9)),
-            user=User.objects.get(id=user_id)
-        )
-        print(activityPeriod2)
 
     return None
 
