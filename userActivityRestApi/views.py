@@ -1,3 +1,34 @@
 from django.shortcuts import render
 
-# Create your views here.
+from django.http.response import JsonResponse
+from rest_framework import status
+
+from userActivityRestApi.models import User, ActivityPeriod
+from userActivityRestApi.serializers import UserSerializer, ActivityPeriodSerializer
+
+from rest_framework.decorators import api_view
+
+
+@api_view(['GET'])
+def userList(request):
+    print('hitting views')
+
+    if request.method == 'GET':
+
+        users = User.objects.all()
+        userSerializer = UserSerializer(users, many=True)
+        usersJson = userSerializer.data
+        print(type(usersJson))
+
+        for user in usersJson:
+            activityRecords = []
+
+            activity = ActivityPeriod.objects.filter(
+                user=User.objects.get(id=user.get('id'))
+            )
+            activitySerializer = ActivityPeriodSerializer(activity, many=True)
+            activityRecords.append(activitySerializer.data)
+
+            user['activity_periods'] = activityRecords
+
+        return JsonResponse(usersJson, safe=False, status=status.HTTP_200_OK)
