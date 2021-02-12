@@ -9,9 +9,9 @@ import random
 def generateData(num):
     for i in range(num):
         fake = Faker()
-
+        user_id = generate(size=10)
         user = User.objects.create(
-            id=generate(size=10),
+            id=user_id,
             real_name=fake.name(),
             tz=fake.timezone()
         )
@@ -21,15 +21,15 @@ def generateData(num):
 
         activityPeriod1 = ActivityPeriod.objects.create(
             start_time=datetime.now(),
-            end_time=datetime.now() + timedelta(random.randint(2, 9))
-            user=user
+            end_time=datetime.now() + timedelta(random.randint(2, 9)),
+            user=User.objects.get(id=user_id)
         )
         print(activityPeriod1)
 
         activityPeriod2 = ActivityPeriod.objects.create(
             start_time=datetime.now(),
-            end_time=datetime.now() + timedelta(random.randint(2, 9))
-            user=user
+            end_time=datetime.now() + timedelta(random.randint(2, 9)),
+            user=User.objects.get(id=user_id)
         )
         print(activityPeriod2)
 
