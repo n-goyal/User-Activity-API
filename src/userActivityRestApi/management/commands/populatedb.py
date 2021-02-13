@@ -43,7 +43,7 @@ class Command(BaseCommand):
         for no_of_records in options['no_of_records']:
             num = no_of_records
         try:
-            self.stduout.write(
+            self.stdout.write(
                 'inserting {} random user records into the database...'.format(
                     num)
             )
