@@ -9,25 +9,23 @@ import random
 def generateData(num):
     for i in range(num):
         fake = Faker()
+        # generate user Id
         user_id = generate(size=10)
-        user = User.objects.create(
+        User.objects.create(
             id=user_id,
             real_name=fake.name(),
             tz=fake.timezone()
         )
-        print(user)
 
-        # print(User.objects.get())
         numActivePeriods = random.randint(2, 18)
 
         for i in range(numActivePeriods):
             activityPeriod1 = ActivityPeriod.objects.create(
                 start_time=datetime.now() - timedelta(random.randint(5, 20)),
                 end_time=datetime.now() + timedelta(random.randint(2, 10)),
+                # attach user to activity period
                 user=User.objects.get(id=user_id)
             )
-        print(activityPeriod1)
-
     return None
 
 
@@ -41,14 +39,24 @@ class Command(BaseCommand):
                             type=int)
 
     def handle(self, *args, **options):
-        num = 5
+        num = 5  # default
         for no_of_records in options['no_of_records']:
             num = no_of_records
         try:
-            print(num)
+            self.stduout.write(
+                'inserting {} random user records into the database...'.format(
+                    num)
+            )
             generateData(num)
+            self.stdout.write(
+                'record insertion completed!'
+            )
         except Exception as err:
-            print(err)
+            self.stdout.write(
+                self.style.ERROR(
+                    err
+                )
+            )
             raise CommandError(
                 'Error while generating data. Please try again!'
             )
