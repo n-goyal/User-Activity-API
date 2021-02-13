@@ -11,4 +11,5 @@ ls -l
 # uwsgi --socket :8000 --master --enable-threads --module app.wsgi
 # cd app
 
+# binds heroku port
 gunicorn fullThrottleTest.wsgi:application --bind 0.0.0.0:$PORT

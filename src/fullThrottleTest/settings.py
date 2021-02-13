@@ -24,9 +24,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '8+-%m9wa2mme1@)g0#mnqsy*9bh@(l0xe8#n6psrk%w=08x7ew'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+DEBUG = (os.environ.get('DEBUG') == 'True')
+
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
 
 
 # Application definition
@@ -88,10 +89,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         "CLIENT": {
-            "name": "fullThrottleDB",
-            "host": 'mongodb+srv://test-user-01:j1PFjfJxAxuhRGFr@freetiercluster.3ruzd.mongodb.net/fullThrottleDB?retryWrites=true&w=majority',
-            "username": 'test-user-01',
-            "password": 'j1PFjfJxAxuhRGFr',
+            "name": os.environ.get('DATABASE_NAME'),
+            "host": os.environ.get('MONGO_URI'),
+            "username": os.environ.get('MONGO_USERNAME'),
+            "password": os.environ.get('MONGO_PASSWORD'),
             "authMechanism": "SCRAM-SHA-1",
         }
     }
