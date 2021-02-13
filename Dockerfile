@@ -28,7 +28,7 @@ RUN chmod -R 755 /vol/web
 USER user
 
 # expose docker 8000 portions
-EXPOSE 8000
+# EXPOSE 8000
 
 # commands
-CMD ["entrypoint.sh"]
+CMD entrypoint.sh

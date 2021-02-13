@@ -11,4 +11,4 @@ ls -l
 # uwsgi --socket :8000 --master --enable-threads --module app.wsgi
 # cd app
 
-gunicorn --bind :8000 fullThrottleTest.wsgi:application
+gunicorn fullThrottleTest.wsgi:application --bind 0.0.0.0:$PORT
