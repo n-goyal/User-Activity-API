@@ -23,8 +23,10 @@ RUN mkdir -p /vol/web/static
 RUN adduser -D user
 RUN chown -R user:user /vol
 
-#provide permissions to the user
+#provide folder permissions to the user
 RUN chmod -R 755 /vol/web
+
+# run as user instead of root
 USER user
 
 # expose docker 8000 portions
